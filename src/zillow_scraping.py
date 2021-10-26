@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 from time import sleep
@@ -73,7 +74,6 @@ class ZillowScraping:
             min_label = self.get_min_label(data)
             distance = helpers.calculate_point_sum(
                 float(min_label['x']+3), m, 0)
-            # print(distance, min_label)
 
             b = float(min_label['y']) - distance
             return m, b
@@ -88,7 +88,6 @@ class ZillowScraping:
             max_label = self.get_max_label(data)
             distance = helpers.calculate_point_sum(
                 float(max_label['x']), m, 1.3)
-            print(m, distance, max_label)
 
             b = float(max_label['y']) - distance
             return m, b
@@ -183,9 +182,13 @@ class ZillowScraping:
             print(df)
             print('Write to file...')
             file_name = 'static/extracted_data.html'
-            html = df.to_html(open(file_name, 'w'))
-            # helpers.open_url_on_chrome(file_name)
-            # print(html)
+            df.to_html(open(file_name, 'w'))
+
+            dirname = os.path.dirname(__file__)
+            file_path = os.path.join(dirname, '..', file_name)
+
+            helpers.open_url_on_chrome(file_path)
+
             print('Task done!')
         except Exception as e:
             print('scrap_to_table error: ' + str(e))
