@@ -11,6 +11,7 @@ def html_to_bs(html):
 
 def get_page_html(url):
     try:
+        print('Initializes the Webdriver...')
         opts = uc.ChromeOptions()
         # Fake user-agent to ignore bot blocking
         ua = UserAgent()
@@ -19,9 +20,12 @@ def get_page_html(url):
 
         # Start scraping ...
         driver = uc.Chrome(options=opts)
+        print('Scraping the page...')
+
         driver.get(url)
-        WebDriverWait(driver, 10)
+        WebDriverWait(driver, 3)
         sleep(2)
+        print('Extracts data...')
         page = html_to_bs(driver.page_source)
         driver.quit()
         return page
