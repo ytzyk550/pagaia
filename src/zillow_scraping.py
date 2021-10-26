@@ -125,7 +125,7 @@ class ZillowScraping:
                     month_frac, year = math.modf(month)
                     month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May',
                                    'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                    column_title = f'Historical {round(month_frac*12)} {month_names[round(month_frac*12)-1]} {round(year)}'
+                    column_title = f'Historical {month_names[round(month_frac*12)-1]} {round(year)}'
                 # Else if it is last item = Today
                 elif i == len(points)-2:
                     column_title = 'Today'
